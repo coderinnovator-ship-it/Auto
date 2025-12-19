@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialReply Pro | Auto-Reply Service</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        
+        /* Landing Page - Sales Pitch */
+        .landing-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .landing-page h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .landing-page h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .price-card {
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .price-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        
+        .price-amount {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+        
+        .price-amount span {
+            font-size: 1.5rem;
+            color: #666;
+        }
+        
+        .features-list {
+            text-align: left;
+            margin: 30px 0;
+        }
+        
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            list-style: none;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            color: #25D366;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #25D366 0%, #1DA1F2 100%);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Dashboard (After Payment) - Hidden Initially */
+        .dashboard-container {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .platform-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-connected { background: #25D366; }
+        .status-disconnected { background: #ff4757; }
+        
+        .testimonials {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .testimonial {
+            font-style: italic;
+            color: #666;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .payment-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 40px auto;
+            display: none;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing/Sales Page -->
+    <div class="landing-page" id="landingPage">
+        <h1>🚀 SocialReply Pro</h1>
+        <h2>Auto-Reply for ALL Your Social Media - One Dashboard</h2>
+        
+        <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; line-height: 1.6;">
+            Stop missing customer messages! Automatically reply to WhatsApp, Facebook, Instagram, 
+            and Telegram messages from ONE simple dashboard. No coding, no setup headaches.
+        </p>
+        
+        <div class="price-card">
+            <h3>Professional Plan</h3>
+            <div class="price-amount">$49<span>/month</span></div>
+            
+            <div class="features-list">
+                <li>Connect WhatsApp Business</li>
+                <li>Connect Facebook Page</li>
+                <li>Connect Instagram Business</li>
+                <li>Connect Telegram Bot</li>
+                <li>Custom Auto-Reply Messages</li>
+                <li>24/7 Message Monitoring</li>
+                <li>Analytics Dashboard</li>
+                <li>Priority Support</li>
+            </div>
+            
+            <button class="cta-button" onclick="showPaymentForm()">
+                🚀 Start 14-Day Free Trial
+            </button>
+            
+            <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
+                No credit card required for trial
+            </p>
+        </div>
+        
+        <!-- Fake Testimonials (You'll replace with real ones) -->
+        <div class="testimonials">
+            <h3 style="color: #333; margin-bottom: 30px;">What Our Customers Say</h3>
+            
+            <div class="testimonial">
+                "SocialReply Pro saved my business! I was missing 40% of customer messages. 
+                Now with auto-reply, my response rate is 100%!" - Sarah, E-commerce Store
+            </div>
+            
+            <div class="testimonial">
+                "Setup took 5 minutes. The dashboard is so simple. My customers love the 
+                instant replies on WhatsApp!" - Mike, Real Estate Agent
+            </div>
+            
+            <div class="testimonial">
+                "Worth every penny! I pay $49/month but it's made me thousands in extra sales 
+                from not missing inquiries." - David, Consultant
+            </div>
+        </div>
+    </div>
+    
+    <!-- Payment Form -->
+    <div class="payment-form" id="paymentForm">
+        <h2 style="color: #333; margin-bottom: 20px;">Start Your Free Trial</h2>
+        
+        <input type="text" id="businessName" placeholder="Business Name">
+        <input type="email" id="email" placeholder="Email Address">
+        <input type="password" id="password" placeholder="Create Password">
+        
+        <button class="cta-button" onclick="createAccount()">
+            🚀 Create Account & Start Trial
+        </button>
+        
+        <p style="text-align: center; margin-top: 15px; color: #666;">
+            By signing up, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+        </p>
+    </div>
+    
+    <!-- Dashboard (Shown after "payment") -->
+    <div class="dashboard-container" id="dashboard">
+        <div class="dashboard-header">
+            <h1 style="color: #333;">Welcome to SocialReply Pro! 🎉</h1>
+            <div style="color: #666;">Trial ends in: <strong>14 days</strong></div>
+        </div>
+        
+        <div class="platform-grid">
+            <!-- WhatsApp Card -->
+            <div class="platform-card">
+                <h3 style="color: #25D366;">WhatsApp Business</h3>
+                <p><span class="status-indicator status-connected"></span> Connected</p>
+                <textarea style="width: 100%; margin: 15px 0; padding: 10px; border-radius: 5px;" 
+                          placeholder="Auto-reply message for WhatsApp...">Thanks for your message! We'll reply within 15 minutes.</textarea>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 1rem;">
+                    Save WhatsApp Settings
+                </button>
+            </div>
+            
+            <!-- Facebook Card -->
+            <div class="platform-card">
+                <h3 style="color: #1877F2;">Facebook Messenger</h3>
+                <p><span class="status-indicator status-connected"></span> Connected</p>
+                <textarea style="width: 100%; margin: 15px 0; padding: 10px; border-radius: 5px;"
+                          placeholder="Auto-reply message for Facebook...">Thanks for messaging our page! We'll get back to you soon.</textarea>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 1rem;">
+                    Save Facebook Settings
+                </button>
+            </div>
+            
+            <!-- Instagram Card -->
+            <div class="platform-card">
+                <h3 style="color: #E4405F;">Instagram DMs</h3>
+                <p><span class="status-indicator status-disconnected"></span> Not Connected</p>
+                <p>Connect your Instagram Business account</p>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 1rem; background: #E4405F;">
+                    Connect Instagram
+                </button>
+            </div>
+            
+            <!-- Telegram Card -->
+            <div class="platform-card">
+                <h3 style="color: #0088cc;">Telegram Bot</h3>
+                <p><span class="status-indicator status-disconnected"></span> Not Connected</p>
+                <p>Set up your Telegram Bot</p>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 1rem; background: #0088cc;">
+                    Setup Telegram Bot
+                </button>
+            </div>
+        </div>
+        
+        <div class="platform-card">
+            <h3>💼 Your Account</h3>
+            <p><strong>Plan:</strong> Professional Trial (14 days left)</p>
+            <p><strong>Monthly Price:</strong> $49/month after trial</p>
+            <p><strong>Connected Platforms:</strong> 2/4</p>
+            <button class="cta-button" style="background: #333; margin-top: 20px;">
+                ⚙️ Account Settings
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Show payment form when "Start Trial" clicked
+        function showPaymentForm() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('paymentForm').style.display = 'block';
+        }
+        
+        // Create account (simulated - in reality, this would go to your backend)
+        function createAccount() {
+            const businessName = document.getElementById('businessName').value;
+            const email = document.getElementById('email').value;
+            
+            if (!businessName || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Show loading
+            alert('🎉 Account created! Welcome to SocialReply Pro!');
+            
+            // Show dashboard
+            document.getElementById('paymentForm').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            
+            // In reality: Send data to your server, create user, setup webhooks, etc.
+            console.log('New account:', { businessName, email });
+            
+            // Simulate setting up webhooks
+            setTimeout(() => {
+                alert('✅ Your social media auto-reply system is now active!');
+            }, 1000);
+        }
+        
+        // For demo purposes - if they reload, show landing page
+        window.onload = function() {
+            // Check if they're already "logged in" for demo
+            const isLoggedIn = localStorage.getItem('socialreply_loggedin');
+            if (isLoggedIn) {
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            }
+            
+            // Save login state for demo
+            if (window.location.hash === '#demo') {
+                localStorage.setItem('socialreply_loggedin', 'true');
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            }
+        };
+        
+        // **ACTUAL BACKEND PLAN (To Actually Make Money):**
+        
+        /*
+        You need:
+        1. Node.js backend (Express)
+        2. Database (PostgreSQL or MongoDB)
+        3. Payment processing (Stripe)
+        4. Webhook handling for each platform
+        
+        Backend Structure:
+        
+        // server.js
+        const express = require('express');
+        const stripe = require('stripe')('your_key');
+        const app = express();
+        
+        // Routes:
+        // POST /api/signup - Create user account
+        // POST /api/subscribe - Handle Stripe subscription
+        // POST /api/webhook/telegram/:userId - Handle Telegram messages
+        // POST /api/webhook/whatsapp/:userId - Handle WhatsApp messages
+        // GET /api/user/:id/settings - Get user settings
+        
+        // Your REAL tech stack:
+        - Frontend: This HTML/CSS/JS (host on Netlify/Vercel)
+        - Backend: Node.js + Express (host on Railway.app)
+        - Database: Supabase (free tier)
+        - Payments: Stripe ($49/month subscription)
+        - WhatsApp: Twilio API
+        - Facebook: Graph API
+        - Telegram: Bot API
+        
+        Monthly costs to you: ~$20
+        Charge customers: $49/month
+        Profit per customer: $29/month
+        
+        Get 10 customers = $290/month
+        Get 100 customers = $2,900/month
+        */
+    </script>
+</body>
+</html>
