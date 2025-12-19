@@ -1,0 +1,37 @@
+// server.js - SIMPLE VERSION
+const express = require('express');
+const app = express();
+
+// Store client settings
+const clients = {
+  // clientId: {
+  //   whatsapp: { token: '...', autoReply: 'Hello!' },
+  //   facebook: { token: '...', autoReply: 'Hi!' }
+  // }
+};
+
+// Client dashboard
+app.get('/dashboard/:clientId', (req, res) => {
+  res.send(`
+    <h1>Your Auto-Reply Dashboard</h1>
+    <p>WhatsApp: Connected ✓</p>
+    <p>Facebook: Connected ✓</p>
+    <p>Change messages below...</p>
+  `);
+});
+
+// Webhook to receive messages
+app.post('/webhook/:clientId/:platform', (req, res) => {
+  const { clientId, platform } = req.params;
+  const message = req.body;
+  
+  // Get client's auto-reply message
+  const autoReply = clients[clientId]?.[platform]?.autoReply || "Thanks for your message!";
+  
+  // Send auto-reply back (you'd implement actual API calls here)
+  console.log(`Auto-replying to ${platform}: ${autoReply}`);
+  
+  res.send({ success: true });
+});
+
+app.listen(3000);
